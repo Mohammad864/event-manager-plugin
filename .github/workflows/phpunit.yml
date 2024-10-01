@@ -30,6 +30,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          sudo mv composer.phar /usr/local/bin/composer
+          composer install  # Install dependencies
+
       - name: Wait for MySQL to be ready
         run: |
           for i in {30..0}; do
@@ -47,9 +53,7 @@ jobs:
           DB_PASS: wp_pass
           DB_NAME: wordpress_test
         run: |
-          # Replace this command with the command to run your tests
           echo "Running tests..."
-          # For example, if using PHPUnit, you might use:
           vendor/bin/phpunit --log-junit tests/logs/junit.xml
 
       - name: Upload test results
