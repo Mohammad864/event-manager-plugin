@@ -1,0 +1,180 @@
+/* General Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Event Header */
+.event-header {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.event-title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.event-details span {
+    font-weight: bold;
+    color: #ffeb3b;
+}
+
+/* Event Content Card */
+.event-content.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.event-content.card .card-body {
+    line-height: 1.8;
+    color: #333;
+}
+
+/* RSVP Form */
+.rsvp-form-wrapper.card {
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fafafa;
+}
+
+.rsvp-form-wrapper .card-body {
+    text-align: center;
+}
+
+.rsvp-form-wrapper h4 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+input[type="submit"] {
+    background-color: #6a11cb;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #2575fc;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+
+    .event-header {
+        padding: 20px;
+    }
+
+    .event-title {
+        font-size: 2.2rem;
+    }
+}
+
+/* Filter Section */
+.filter-section {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+
+.event-filter-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.event-filter-container .form-group {
+    margin-bottom: 15px;
+}
+
+.event-filter-container label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.event-filter-container input[type="text"],
+.event-filter-container input[type="date"],
+.event-filter-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.event-filter-container input[type="submit"] {
+    background: #0073aa;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.event-filter-container input[type="submit"]:hover {
+    background: #005c8b;
+}
+
+.event-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.event-list li {
+    background: #ffffff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    transition: box-shadow 0.3s;
+}
+
+.event-list li:hover {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.event-list a {
+    text-decoration: none;
+    color: #0073aa;
+    font-weight: bold;
+}
+
+.event-list a:hover {
+    text-decoration: underline;
+}
+
