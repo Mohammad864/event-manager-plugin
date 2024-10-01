@@ -45,7 +45,7 @@ jobs:
           # Install the WordPress testing framework
           git clone --depth=1 https://github.com/WordPress/wordpress-develop.git /tmp/wordpress-develop
           cd /tmp/wordpress-develop
-          git checkout tags/6.6.2
+          git checkout tags/6.6.1  # Replace <valid_tag> with an available tag
           cp -a /path/to/your/bin/install-wp-tests.sh /tmp/wordpress-develop/bin/
           cd /tmp/wordpress-develop/bin
           ./install-wp-tests.sh wordpress_test wp_user wp_pass mysql:3306
