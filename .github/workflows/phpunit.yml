@@ -1,53 +1,47 @@
-name: Run Tests with MySQL
+name: PHP Unit Tests
 
-on: 
-  push:
-    branches: 
-      - main
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     services:
       mysql:
-        image: mysql:latest
+        image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: wordpress_test
           MYSQL_USER: wp_user
           MYSQL_PASSWORD: wp_pass
         ports:
           - 3306:3306
         options: >-
-          --health-cmd "mysqladmin ping -h localhost"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          --health-cmd="mysqladmin ping --silent" 
+          --health-interval=10s 
+          --health-timeout=5s 
+          --health-retries=3
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Wait for MySQL to be ready
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'  # specify the PHP version you need
+          extensions: mbstring, xml, curl
+
+      - name: Install dependencies
         run: |
-          for i in {30..0}; do
-            if mysqladmin ping -h 127.0.0.1 --silent; then
-              break
-            fi
-            echo 'Waiting for MySQL...'
-            sleep 1
-          done
+          composer install
 
       - name: Run tests
-        env:
-          DB_HOST: 127.0.0.1
-          DB_USER: wp_user
-          DB_PASS: wp_pass
-          DB_NAME: wordpress_test
         run: |
-          # Replace this command with the command to run your tests
-          echo "Running tests..."
-          # For example, if using PHPUnit, you might use:
-          # vendor/bin/phpunit
+          vendor/bin/phpunit --log-junit tests/logs/junit.xml
+
+      - name: Upload test results
+        if: always()  # Ensure this runs regardless of the previous step's outcome
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: tests/logs/junit.xml
