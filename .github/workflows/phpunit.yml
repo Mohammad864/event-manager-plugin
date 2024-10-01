@@ -3,26 +3,30 @@ name: Run PHPUnit Tests
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'  # specify the PHP version you need
-          extensions: mbstring, xml, bcmath, mysqli
+    - name: Set up PHP
+      uses: shivammathur/php-action@v2
+      with:
+        php-version: '8.1'
+        coverage: 'xdebug'
+    
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+    
+    - name: Install WordPress test suite
+      run: bin/install-wp-tests.sh
 
-      - name: Install Composer dependencies
-        run: composer install
-
-      - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --configuration phpunit.xml.dist
-
+    - name: Run PHPUnit
+      run: vendor/bin/phpunit --configuration phpunit.xml.dist
