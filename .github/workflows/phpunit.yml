@@ -45,6 +45,7 @@ jobs:
         run: |
           for i in {1..30}; do
             if mysqladmin ping -h mysql -u wp_user --password=wp_pass; then
+              echo "MySQL is ready!"
               break
             fi
             echo "Waiting for MySQL to be ready..."
