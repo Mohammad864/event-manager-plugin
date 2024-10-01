@@ -1,3 +1,4 @@
+
 # Custom Event Manager Plugin
 
 ## Task Overview
@@ -58,12 +59,14 @@ This plugin adds a custom post type, **Event**, to your WordPress site, along wi
    cd custom-event-manager
    ```
 
-3. Activate the plugin through the WordPress admin interface or using WP-CLI:
+3. Upload the plugin folder to the `wp-content/plugins/` directory of your WordPress installation.
+
+4. Activate the plugin through the WordPress admin interface or using WP-CLI:
    ```bash
    wp plugin activate custom-event-manager
    ```
 
-4. Follow the setup instructions in the WordPress admin panel to configure the plugin.
+5. Follow the setup instructions in the WordPress admin panel to configure the plugin.
 
 ## Usage Guidelines
 
@@ -104,4 +107,4 @@ Contributions are welcome! Please submit a pull request or open an issue for any
 
 ## Author
 
-[Your Name](https://yourwebsite.com) - [Your GitHub Profile](https://github.com/yourusername)
+[Mohammad Taghipoor](https://yourwebsite.com) - [Your GitHub Profile](https://github.com/developer8640)
