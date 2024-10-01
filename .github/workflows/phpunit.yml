@@ -39,9 +39,10 @@ jobs:
         run: |
           vendor/bin/phpunit --log-junit tests/logs/junit.xml
 
-      - name: Upload test results
-        if: always()  # Ensure this runs regardless of the previous step's outcome
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: tests/logs/junit.xml
+          - name: Upload test results
+          if: always()  # Ensure this runs regardless of the previous step's outcome
+          uses: actions/upload-artifact@v3  # Updated to v3
+          with:
+            name: test-results
+            path: tests/logs/junit.xml
+        
