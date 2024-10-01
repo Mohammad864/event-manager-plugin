@@ -35,12 +35,15 @@ jobs:
       - name: Install Composer dependencies
         run: composer install
 
-      - name: Install WordPress Testing Framework
+      - name: Install WP-CLI
         run: |
-          wget -O - https://raw.githubusercontent.com/wp-cli/builds/gh-pages/gh-cli.phar > wp-cli.phar
-          chmod +x wp-cli.phar
+          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/installer.sh
+          bash installer.sh
           sudo mv wp-cli.phar /usr/local/bin/wp
-          bin/install-wp-tests.sh wordpress_test wp_user wp_pass mysql:3306
+          sudo chmod +x /usr/local/bin/wp
+
+      - name: Install WordPress Testing Framework
+        run: bin/install-wp-tests.sh wordpress_test wp_user wp_pass mysql:3306
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --configuration phpunit.xml.dist
