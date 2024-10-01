@@ -41,6 +41,16 @@ jobs:
           sudo mv gh-cli.phar /usr/local/bin/wp
           sudo chmod +x /usr/local/bin/wp
 
+      - name: Wait for MySQL to be ready
+        run: |
+          for i in {1..30}; do
+            if mysqladmin ping -h mysql -u wp_user --password=wp_pass; then
+              break
+            fi
+            echo "Waiting for MySQL to be ready..."
+            sleep 1
+          done
+
       - name: Install WordPress Testing Framework
         run: bin/install-wp-tests.sh wordpress_test wp_user wp_pass mysql:3306
 
