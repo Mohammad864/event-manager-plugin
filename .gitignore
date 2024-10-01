@@ -1,0 +1,18 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore CI/CD configurations if not needed
+.circleci/
+
+# Ignore PHP and composer-related folders if not needed
+/bin/
+/vendor/
+
+# Ignore IDE configuration files
+.vscode/
+*.sublime*
+
+# Ignore configuration/testing files if not needed
+.phpcs.xml.dist
+phpunit.xml.dist
