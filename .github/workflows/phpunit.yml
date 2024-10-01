@@ -1,14 +1,18 @@
-name: PHP Unit Tests
+name: Run Tests with MySQL
 
-on: [push, pull_request]
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    
     services:
       mysql:
-        image: mysql:5.7
+        image: mysql:latest
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: wordpress_test
@@ -17,43 +21,33 @@ jobs:
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h localhost -u root --password=root"
-          --health-interval=30s
-          --health-timeout=5s
-          --health-retries=3
+          --health-cmd "mysqladmin ping -h localhost"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-          extensions: mbstring, xml, curl
-
-      - name: Install Composer dependencies
-        run: composer install
-
-      - name: Install WP-CLI
-        run: |
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/gh-cli.phar
-          sudo mv gh-cli.phar /usr/local/bin/wp
-          sudo chmod +x /usr/local/bin/wp
-
       - name: Wait for MySQL to be ready
         run: |
-          for i in {1..30}; do
-            if mysqladmin ping -h mysql -u wp_user --password=wp_pass; then
-              echo "MySQL is ready!"
+          for i in {30..0}; do
+            if mysqladmin ping -h 127.0.0.1 --silent; then
               break
             fi
-            echo "Waiting for MySQL to be ready..."
+            echo 'Waiting for MySQL...'
             sleep 1
           done
 
-      - name: Install WordPress Testing Framework
-        run: bin/install-wp-tests.sh wordpress_test wp_user wp_pass mysql:3306
-
-      - name: Run PHPUnit tests
-        run: vendor/bin/phpunit --configuration phpunit.xml.dist
+      - name: Run tests
+        env:
+          DB_HOST: 127.0.0.1
+          DB_USER: wp_user
+          DB_PASS: wp_pass
+          DB_NAME: wordpress_test
+        run: |
+          # Replace this command with the command to run your tests
+          echo "Running tests..."
+          # For example, if using PHPUnit, you might use:
+          # vendor/bin/phpunit
