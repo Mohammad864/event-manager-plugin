@@ -37,9 +37,8 @@ jobs:
 
       - name: Install WP-CLI
         run: |
-          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/installer.sh
-          bash installer.sh
-          sudo mv wp-cli.phar /usr/local/bin/wp
+          curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/gh-cli.phar
+          sudo mv gh-cli.phar /usr/local/bin/wp
           sudo chmod +x /usr/local/bin/wp
 
       - name: Install WordPress Testing Framework
